@@ -72,7 +72,7 @@ class ScoreController extends Controller
 
     function getRanks(){
         try{
-            $scores = Score::orderBy('score_time','desc')->take(100)->get();
+            $scores = Score::where('nickname','!=','')->orderBy('score_time','desc')->take(100)->get();
             $scoresArray = $scores->toArray();
             array_multisort(array_column($scoresArray,'degree'),SORT_DESC,$scoresArray);
             return $this->responseSuccess('success',200,$scoresArray);
